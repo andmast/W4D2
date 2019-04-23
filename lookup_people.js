@@ -1,7 +1,8 @@
-const dbPG = require ('./test_script')
-const dbKNEX = require ('./knex_test_script')
+
 const input = process.argv[2];
 
+const dbPG = require ('./test_script')
+//---------------------PG---------------------
 dbPG.findByName(input,function(err, output) {
       if(!err) {
         console.log(`Found by pg ${output.rows.length} person(s) by the name of '${input}': `)
@@ -12,8 +13,12 @@ dbPG.findByName(input,function(err, output) {
         console.log(err);
       }
     });
+//---------------------PG---------------------
 
-dbKNEX.findByNameKnex(input,function(err, output) {
+
+const dbKNEX = require ('./knex_test_script')
+//---------------------Knex---------------------
+dbKNEX.findByName(input,function(err, output) {
       if(!err) {
         console.log(`Found by knex ${output.length} person(s) by the name of '${input}': `)
         output.forEach( (element, index) => {
@@ -22,7 +27,9 @@ dbKNEX.findByNameKnex(input,function(err, output) {
       } else {
         console.log(err);
       }
-    });
+});
+//---------------------Knex---------------------
+
 
 console.log("Searching...");
 

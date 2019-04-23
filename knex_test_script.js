@@ -12,7 +12,7 @@ module.exports = (function(){
     }
   });
 
-  function findByNameKnex(name, callback) {
+  function findByName(name, callback) {
     knex.select('*').from('famous_people')
     .where('first_name', '=' ,name).orWhere('last_name', '=', name)
     .asCallback(function(err, rows) {
@@ -24,9 +24,26 @@ module.exports = (function(){
     })
   }
 
-   return {
+  //INSERT INTO famous_people (first_name, last_name, birthdate)
+  // VALUES ('Abraham', 'Lincoln', '1809-02-12');
 
-    findByNameKnex: findByNameKnex,
+  function insertFamous (array) {
+    const first_name = array[0];
+    const last_name = array[1];
+    const birthdate = array[2];
+    knex('famous_people')
+    .insert({first_name,last_name,birthdate})
+    .then(() => console.log("data Added"))
+    .catch((err) => console.log("error",err))
+
+
+  }
+
+
+
+   return {
+    findByName: findByName,
+    insertFamous: insertFamous,
   }
 
 })()
