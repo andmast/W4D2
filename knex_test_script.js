@@ -35,8 +35,7 @@ module.exports = (function(){
     .insert({first_name,last_name,birthdate})
     .then(() => console.log("data Added"))
     .catch((err) => console.log("error",err))
-
-
+    .finally(() => knex.destroy());
   }
 
 
