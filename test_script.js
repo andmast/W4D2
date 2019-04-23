@@ -20,7 +20,7 @@ module.exports = (function(){
 
 
   function findByName(name, callback) {
-    client.query(`SELECT * FROM famous_people WHERE first_name = $1 OR last_name = $1`, [name])
+    client.query(`SELECT * FROM famous_people WHERE first_name = $1`, [name])
     .then (results => {
       callback(null, results)
       client.end();
